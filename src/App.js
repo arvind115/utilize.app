@@ -63,7 +63,13 @@ export default function App() {
         onDrop={(e) => onDrop(e, "working")}
       >
         <div className="title">Working</div>
-        <div className="listDiv">{working}</div>
+        <div className="listDiv">
+          {working.length > 0 ? (
+            working
+          ) : (
+            <p style={{ color: "red" }}>Nothing here</p>
+          )}
+        </div>
       </div>
       <div
         className="column todo"
@@ -71,7 +77,14 @@ export default function App() {
         onDrop={(e) => onDrop(e, "todo")}
       >
         <div className="title">To-do</div>
-        <div className="listDiv">{todo}</div>
+        <div className="listDiv">
+          {" "}
+          {todo.length > 0 ? (
+            todo
+          ) : (
+            <p style={{ color: "red" }}>Nothing here</p>
+          )}
+        </div>
       </div>
       <div
         className="column done"
@@ -79,7 +92,14 @@ export default function App() {
         onDrop={(e) => onDrop(e, "done")}
       >
         <div className="title">Done</div>
-        <div className="listDiv">{done}</div>
+        <div className="listDiv">
+          {" "}
+          {done.length > 0 ? (
+            done
+          ) : (
+            <p style={{ color: "red" }}>Nothing here</p>
+          )}
+        </div>
       </div>
     </div>
   );
