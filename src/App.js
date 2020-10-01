@@ -1,78 +1,86 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
-export default class App extends Component {
-  state = {
-    tasks: [
-      { name: "Learn Angular in 1 month", category: "working" },
-      { name: "React", category: "working" },
-      { name: "Vue", category: "done" },
-      { name: "Firebase", category: "done" },
-      { name: "Mongo", category: "todo" },
-      { name: "AWS", category: "todo" },
-      { name: "Azure", category: "todo" },
-    ],
-  };
-  onDrop = (e, cat) => {
+export default function App() {
+  const [tasks, setTasks] = useState([
+    { name: "Learn Angular", category: "working" },
+    { name: "Learn React", category: "working" },
+    { name: "Vue", category: "done" },
+    { name: "Firebase", category: "done" },
+    { name: "Improve Mongo skills", category: "todo" },
+    { name: "Deep dive into AWS", category: "todo" },
+    { name: "Azure", category: "todo" },
+  ]);
+
+  const getDraggableDiv = (
+    t // generates & returns a single draggable <div>
+  ) => (
+    <div
+      key={t.name}
+      onDragStart={(e) => e.dataTransfer.setData("name", t.name)}
+      draggable
+      className="draggableTaskDiv"
+    >
+      {t.name}
+    </div>
+  );
+
+  const [working, setWorking] = useState([]);
+  const [todo, setTodo] = useState([]);
+  const [done, setDone] = useState([]);
+
+  const onDrop = (e, cat) => {
+    //gets called when user drops the draggable <div>
     const name = e.dataTransfer.getData("name");
-    this.setState({
-      ...this.state,
-      ...this.state.tasks.filter((task) => {
-        if (task.name === name) {
-          task.category = cat;
-        }
-        return task;
-      }),
-    });
+    setTasks(
+      //update the state, useEffect() is fired after this
+      tasks.map((task) =>
+        task.name === name ? { name: task.name, category: cat } : task
+      )
+    );
   };
 
-  render() {
-    var tasks = {
-      working: [],
-      todo: [],
-      done: [],
-    };
-    this.state.tasks.forEach((t) => {
-      tasks[t.category].push(
-        <div
-          key={t.name}
-          onDragStart={(e) => e.dataTransfer.setData("name", t.name)}
-          draggable
-          className="draggableTaskDiv"
-        >
-          {t.name}
-        </div>
-      );
-    });
+  useEffect(() => {
+    const filteredTasks = (
+      cat // get the tasks for a given category
+    ) => tasks.filter((task) => task.category === cat);
 
-    return (
-      <div className="container">
-        {/* <h2 className="header">DRAG & DROP DEMO</h2> */}
-        <div
-          className="column working"
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={(e) => this.onDrop(e, "working")}
-        >
-          <div className="title">Working</div>
-          <div className="listDiv">{tasks.working}</div>
-        </div>
-        <div
-          className="column todo"
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={(e) => this.onDrop(e, "todo")}
-        >
-          <div className="title">To-do</div>
-          <div className="listDiv">{tasks.todo}</div>
-        </div>
-        <div
-          className="column done"
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={(e) => this.onDrop(e, "done")}
-        >
-          <div className="title">Done</div>
-          <div className="listDiv">{tasks.done}</div>
-        </div>
+    const generateList = (
+      cat // get the draggable <div> list for a given category
+    ) => filteredTasks(cat).map((t) => getDraggableDiv(t));
+
+    setWorking(generateList("working")); //update the state
+    setTodo(generateList("todo"));
+    setDone(generateList("done"));
+  }, [tasks]); //re-render each time user drags & drops, ( or initially )
+
+  return (
+    <div className="container">
+      {/* <h2 className="header">DRAG & DROP DEMO</h2> */}
+      <div
+        className="column working"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={(e) => onDrop(e, "working")}
+      >
+        <div className="title">Working</div>
+        <div className="listDiv">{working}</div>
       </div>
-    );
-  }
+      <div
+        className="column todo"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={(e) => onDrop(e, "todo")}
+      >
+        <div className="title">To-do</div>
+        <div className="listDiv">{todo}</div>
+      </div>
+      <div
+        className="column done"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={(e) => onDrop(e, "done")}
+      >
+        <div className="title">Done</div>
+        <div className="listDiv">{done}</div>
+      </div>
+    </div>
+  );
 }
