@@ -1,38 +1,81 @@
 .App {
   text-align: center;
+  width: 95%;
+  margin: 15px auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  position: absolute;
+  height: 440px;
+  width: 60vw;
+  left: 50%;
+  transform: translateX(-50%);
+  background: pink;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.column {
+  display: inline-block;
+  margin: 10px 10px 10px 20px;
+  width: 240px;
+  height: 400px;
+}
+.title {
+  height: 40px;
+  width:240px;
+  text-align: center;
+  padding-top:15px;
+  color:snow;
+  font-size:16px;
+  font-weight: 600;
+  border:none;
+  display: block;
+}
+.listDiv{
+  width: 240px;
+  height: 360px;
+  overflow-x: scroll;
+  overflow-y:none;
+  background:red;
+}
+.working {
+  background: #eeeeee;
+}
+.working .title{
+ background:blue;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.todo {
+  background: #eeeeee;
+}
+.todo .title{
+  background:orange;
+}
+.done {
+  background: #eeeeee;
+}
+.done .title{
+  background:seagreen;
+}
+.header {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  background-color: #e0e0e0;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.task-header {
+  display: inline-block;
+  background-color: skyblue;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.draggableTaskDiv {
+  width: 220px;
+  height: 40px;
+  margin: 5px;
+  background:snow;
+  border-radius: 6px;
+  text-align: center;
+  padding-top:20px;
 }
