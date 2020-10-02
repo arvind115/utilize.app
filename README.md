@@ -1,5 +1,7 @@
 # Process followed
 
+The concerned code is in src/App.js
+
 In total, 3 types of tasks lists are implemented namely, 'working','todo', & 'done'. Each of these lists is droppable, i.e task from one list can be removed from one list & be added to another by drag and drop.
 
 - An HTML element can be made **draggable** by setting the draggable attribute to true.
