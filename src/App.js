@@ -3,21 +3,25 @@ import "./App.css";
 
 export default function App() {
   const [tasks, setTasks] = useState([
-    { name: "Learn Angular", category: "working" },
-    { name: "Learn React", category: "working" },
-    { name: "Vue", category: "done" },
-    { name: "Firebase", category: "done" },
-    { name: "Improve Mongo skills", category: "todo" },
-    { name: "Deep dive into AWS", category: "todo" },
-    { name: "Azure", category: "todo" },
+    { name: "Learn Angular", category: "working", id: 0 },
+    { name: "Learn React", category: "working", id: 1 },
+    { name: "Vue", category: "done", id: 2 },
+    { name: "Firebase", category: "done", id: 3 },
+    { name: "Improve Mongo skills", category: "todo", id: 4 },
+    { name: "Deep dive into AWS", category: "todo", id: 5 },
+    { name: "Azure", category: "todo", id: 6 },
   ]);
+
+  const [working, setWorking] = useState([]);
+  const [todo, setTodo] = useState([]);
+  const [done, setDone] = useState([]);
 
   const getDraggableDiv = (
     t // generates & returns a single draggable <div>
   ) => (
     <div
-      key={t.name}
-      onDragStart={(e) => e.dataTransfer.setData("name", t.name)}
+      key={t.id}
+      onDragStart={(e) => e.dataTransfer.setData("id", t.id)}
       draggable
       className="draggableTaskDiv"
     >
@@ -25,29 +29,25 @@ export default function App() {
     </div>
   );
 
-  const [working, setWorking] = useState([]);
-  const [todo, setTodo] = useState([]);
-  const [done, setDone] = useState([]);
-
   const onDrop = (e, cat) => {
     //gets called when user drops the draggable <div>
-    const name = e.dataTransfer.getData("name");
+    const id = e.dataTransfer.getData("id");
     setTasks(
       //update the state, useEffect() is fired after this
       tasks.map((task) =>
-        task.name === name ? { name: task.name, category: cat } : task
+        task.id == id ? { name: task.name, category: cat, id: task.id } : task
       )
     );
   };
 
   useEffect(() => {
-    const filteredTasks = (
-      cat // get the tasks for a given category
-    ) => tasks.filter((task) => task.category === cat);
+    // get the tasks for a given category
+    const filteredTasks = (cat) =>
+      tasks.filter((task) => task.category === cat);
 
-    const generateList = (
-      cat // get the draggable <div> list for a given category
-    ) => filteredTasks(cat).map((t) => getDraggableDiv(t));
+    // get the draggable <div> list for a given category
+    const generateList = (cat) =>
+      filteredTasks(cat).map((t) => getDraggableDiv(t));
 
     setWorking(generateList("working")); //update the state
     setTodo(generateList("todo"));
@@ -56,7 +56,6 @@ export default function App() {
 
   return (
     <div className="container">
-      {/* <h2 className="header">DRAG & DROP DEMO</h2> */}
       <div
         className="column working"
         onDragOver={(e) => e.preventDefault()}

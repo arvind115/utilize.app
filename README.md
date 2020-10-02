@@ -1,3 +1,22 @@
+# Process followed
+
+In total, 3 types of tasks lists are implemented namely, 'working','todo', & 'done'. Each of these lists is droppable, i.e task from one list can be removed from one list & be added to another by drag and drop.
+
+- An HTML element can be made **draggable** by setting the draggable attribute to true.
+- An element, or area of an element can be made **droppable** by implementing the 'dragover' event.
+- The **drag** event is fired as soon as a 'draggable' element is dragged.
+- The **drop** event is captured by a droppable element.
+- Any data that might come handy to handle update, can be captured in **onDragStart** event. This event is fired by the **draggable** element. That data can be stored in dataTransfer object.
+- In the provided implementation, a single Task is represented by <div> containing a class "draggableTaskDiv". This <div> has the **draggable** attribute & handles the **onDragStart** event. Each Task can be identified by a unique id. This id is captured in onDragStart event & stored in dataTransfer object.
+
+A list of certain type is represented by a <div> that handles **onDragOver** and **onDrop** events. Default behavior is prevented when onDragOver is fired, while in case of onDrop, a function is called to handle updates.
+
+The global state of tasks of all categories is stored in **tasks** array, which can be mutated using **setTasks** function. The state of all 3 types of list is stored separately in 3 different arrays, which in turn, have their own functions associated with them for handling mutations. Yes, we're using useState hook. All the 3 arrays depend upon tasks array for their state.
+
+So, when **onDrop** event is fired, a function is called, which updates the category of the dragged task. This means **tasks** array is changed using setTasks function.
+
+The state of all 3 lists is determined in useEffect hook which fired every time a change is made to tasks array, ( or when the component is rendered for the first time ).
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
