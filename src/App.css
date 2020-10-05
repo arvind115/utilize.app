@@ -4,79 +4,70 @@
   margin: 15px auto;
 }
 
-.container {
-  position: absolute;
-  height: 440px;
-  width: 60vw;
-  left: 50%;
-  transform: translateX(-50%);
-  background: cornflowerblue;
-  border-radius: 6px;
-  margin-top:20px;
+input {
+  display: block;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #cfcfcf;
+  font-family: "Roboto Slab", sans-serif;
+  font-size: 16px;
+  outline: none;
 }
 
-.column {
-  display: inline-block;
-  margin: 10px 10px 10px 20px;
-  width: 240px;
-  height: 400px;
-}
-.title {
-  height: 40px;
-  width:240px;
-  text-align: center;
-  padding-top:15px;
-  color:snow;
-  font-size:16px;
-  font-weight: 600;
-  border:none;
+label {
   display: block;
 }
-.listDiv{
-  width: 240px;
-  height: 360px;
-  overflow-x: scroll;
-  overflow-y:none;
-}
-.working {
-  background: #eeeeee;
-}
-.working .title{
- background:blue;
-}
 
-.todo {
-  background: #eeeeee;
+select {
+  display: block;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  width: 223px;
+  padding: 10px;
 }
-.todo .title{
-  background:orange;
-}
-.done {
-  background: #eeeeee;
-}
-.done .title{
-  background:seagreen;
-}
-.header {
+form {
   display: inline-block;
-  margin: 0;
-  padding: 0;
-  background-color: #e0e0e0;
-  width: 100%;
+  margin-top: 50px;
+  vertical-align: top;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.task-header {
-  display: inline-block;
-  background-color: skyblue;
+form > button {
+  height: 42px;
   width: 100%;
-}
-
-.draggableTaskDiv {
-  width: 220px;
-  height: 40px;
-  margin: 5px;
-  background:snow;
+  background: #ff3e6c;
+  color: white;
+  font-size: 18px;
+  font-weight: bolder;
+  outline: none;
+  border: none;
   border-radius: 6px;
+}
+
+.header {
+  width: 100%;
+  height: 32px;
+  background: seagreen;
+  color: snow;
   text-align: center;
-  padding-top:20px;
+  padding-top: 8px;
+}
+
+.loginBanner {
+  text-align: center;
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size:24px;
+}
+
+.loginBanner > button {
+  height: 50px;
+  width: 240px;
+  margin-top:20px;
+  padding-left: 18px;
 }

@@ -1,0 +1,27 @@
+.card {
+  width: 700px;
+  height: 140px;
+  border: 1px solid grey;
+  border-radius: 6px;
+  margin: 12px;
+  padding: 16px 0px 0px 16px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 26px;
+}
+
+.card a {
+  text-align: center;
+  height: 32px;
+  width: 180px;
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  background: cadetblue;
+  border: 1px solid cadetblue;
+  border-radius: 6px;
+  padding-top: 8px;
+  text-decoration: none;
+  color: snow;
+}
